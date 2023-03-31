@@ -12,7 +12,6 @@ import 'package:loomi_flutter_boilerplate/src/utils/helpers/image_picker_helper.
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/scroll_listener_helper.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/select_pictures_sheet_helper.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/show_confirmation_dialog_helper.dart';
-
 import '../stores/example_store.dart';
 
 class ExampleScreen extends StatefulWidget {
@@ -86,9 +85,10 @@ class _ExampleScreenState extends State<ExampleScreen> {
                       Padding(
                         padding: const EdgeInsets.all(25),
                         child: SearchBarComponent(
-                          hintText: "Pesquisar",
+                          hintText: "Pesquisar 123",
                           onChanged: (value) {
                             log("O valor só chegou agora: $value");
+                            print("O valor só chegou agora: $value");
                           },
                         ),
                       ),

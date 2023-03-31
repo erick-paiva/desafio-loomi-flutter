@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConnectivityAppWrapper(
       app: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Desafio Loomi',
         theme: ThemeData(
           primaryColor: CustomColors.primary,
         ),

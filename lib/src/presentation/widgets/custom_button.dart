@@ -3,22 +3,24 @@ import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
-    Key? key,
-    this.backgroundColor,
-    this.margin,
-    this.padding,
-    this.borderColor,
-    this.borderThickness,
-    this.expanded = false,
-    this.borderRadius,
-    this.textStyle,
-    this.textColor,
-    this.leading,
-    this.trailing,
-    required this.text,
-    required this.onTap,
-  }) : super(key: key);
+  const CustomButton(
+      {Key? key,
+      this.backgroundColor,
+      this.margin,
+      this.padding,
+      this.borderColor,
+      this.borderThickness,
+      this.expanded = false,
+      this.borderRadius,
+      this.textStyle,
+      this.textColor,
+      this.leading,
+      this.trailing,
+      required this.text,
+      required this.onTap,
+      this.width,
+      this.height})
+      : super(key: key);
 
   final Color? backgroundColor;
   final String text;
@@ -33,6 +35,8 @@ class CustomButton extends StatelessWidget {
   final bool expanded;
   final double? borderRadius;
   final Function() onTap;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,8 @@ class CustomButton extends StatelessWidget {
             width: borderThickness ?? 0.0,
           ),
         ),
+        width: width,
+        height: height,
         padding: padding ?? const EdgeInsets.symmetric(vertical: 25),
         margin: margin ?? EdgeInsets.zero,
         child: Row(

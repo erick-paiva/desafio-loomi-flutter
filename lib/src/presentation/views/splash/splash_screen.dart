@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/example_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/views/home/home.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/views/login/login.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/fonts.dart';
 import '../../../utils/authentication.dart';
@@ -26,11 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
       try {
         var authenticated = await Authentication.authenticated();
         if (authenticated) {
-          Navigator.pushNamed(context, ExampleScreen.routeName);
+          Navigator.pushNamed(context, Home.routeName);
           removeNativeSplash();
         } else {
           //Navigator.pushNamed(context, <YOUR-AUTH-SCREEN>.routeName); //TODO
-          Navigator.pushNamed(context, ExampleScreen.routeName);
+          Navigator.pushNamed(context, Login.routeName);
           removeNativeSplash();
         }
       } catch (e) {
