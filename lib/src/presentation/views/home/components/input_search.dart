@@ -10,7 +10,7 @@ class InputSearch extends StatefulWidget {
   final TextEditingController? controller;
   final void Function(String) onChanged;
 
-  InputSearch(
+  const InputSearch(
       {super.key,
       this.hintText,
       this.labelText,
@@ -44,7 +44,8 @@ class _InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      margin: widget.margin ??
+          const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       Labelchild: Text(widget.labelText ?? "",
           style: TextStyle(
               color: CustomColors.black10,
@@ -61,7 +62,7 @@ class _InputSearchState extends State<InputSearch> {
         style: TextStyle(color: CustomColors.black10),
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-            icon: Icon(Icons.search, size: 30),
+            icon: const Icon(Icons.search, size: 30),
             border: InputBorder.none,
             hintText: widget.hintText,
             hintStyle: TextStyle(color: CustomColors.gray70)),
@@ -84,15 +85,15 @@ class TextFieldContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: margin != null ? margin : EdgeInsets.symmetric(horizontal: 20),
+        margin: margin ?? const EdgeInsets.symmetric(horizontal: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(margin: EdgeInsets.only(left: 15), child: Labelchild),
+          Container(margin: const EdgeInsets.only(left: 15), child: Labelchild),
           Container(
             width: double.infinity,
             height: 56,
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(vertical: 11),
-            padding: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(vertical: 11),
+            padding: const EdgeInsets.symmetric(
               horizontal: 14,
             ),
             decoration: BoxDecoration(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loomi_flutter_boilerplate/src/external/models/cart_model.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/store.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
@@ -42,13 +41,13 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
     int _currentIndex = widget.currentIndex;
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          padding: EdgeInsets.only(left: 20),
-          icon: Icon(Icons.arrow_back_ios),
+          padding: const EdgeInsets.only(left: 20),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             widget.setCurrentPage("store");
           },
@@ -64,7 +63,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(top: 15),
+          margin: const EdgeInsets.only(top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -76,7 +75,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                       return Builder(
                         builder: (BuildContext context) {
                           return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -89,10 +88,10 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                                     color: CustomColors.black10,
                                   ),
                                 ),
-                                SizedBox(height: 15),
+                                const SizedBox(height: 15),
                                 ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8.0)),
                                   child: Image.network(
                                     product.coverImage,
                                     fit: BoxFit.cover,
@@ -120,7 +119,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                     left: 0,
                     right: 0,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -129,7 +128,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                             child: Icon(Icons.arrow_back,
                                 color: CustomColors.gray90, size: 40),
                           ),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 20),
                           GestureDetector(
                             onTap: nextPage,
                             child: Icon(Icons.arrow_forward,
@@ -145,20 +144,22 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.setCurrentPage("HowToPaint");
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: CustomColors.gray70,
                       elevation: 0,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(50),
                             topLeft: Radius.circular(50),
                             bottomRight: Radius.circular(4),
                             topRight: Radius.circular(4)),
                       ),
-                      minimumSize: Size(160, 44),
+                      minimumSize: const Size(160, 44),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Como pintar",
                       style: TextStyle(
                           fontSize: 14,
@@ -166,22 +167,22 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      primary: CustomColors.gray70,
+                      backgroundColor: CustomColors.gray70,
                       elevation: 0,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(4),
                             topLeft: Radius.circular(4),
                             bottomRight: Radius.circular(50),
                             topRight: Radius.circular(50)),
                       ),
-                      minimumSize: Size(150, 44),
+                      minimumSize: const Size(150, 44),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Tirar dúvidas",
                       style: TextStyle(
                           fontSize: 14,
@@ -194,9 +195,10 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
               Container(
                 width: double.infinity,
                 height: 198,
-                margin:
-                    EdgeInsets.only(left: 45, right: 45, top: 18, bottom: 26),
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 22),
+                margin: const EdgeInsets.only(
+                    left: 45, right: 45, top: 18, bottom: 26),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 22),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(width: 1, color: CustomColors.gray100),
@@ -210,7 +212,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                               color: CustomColors.black10,
                               fontWeight: FontWeight.bold)),
                       Container(
-                        margin: EdgeInsets.only(top: 23),
+                        margin: const EdgeInsets.only(top: 23),
                         child: Row(
                           children: [
                             SvgPicture.asset(
@@ -218,7 +220,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                                 "brush.svg",
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Text("Fácil de aplicar",
                                 style: TextStyle(
                                   fontSize: 14,
@@ -228,7 +230,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 23),
+                        margin: const EdgeInsets.symmetric(vertical: 23),
                         child: Row(
                           children: [
                             SvgPicture.asset(
@@ -236,7 +238,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                                 "smelless.svg",
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Text("Não deixa cheiro",
                                 style: TextStyle(
                                   fontSize: 14,
@@ -252,7 +254,7 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                               "paint_bucket.svg",
                             ),
                           ),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 20),
                           Text("É só abrir, mexer e pintar",
                               style: TextStyle(
                                 fontSize: 14,
@@ -263,21 +265,21 @@ class _DescriptionOfPaintsState extends State<DescriptionOfPaints> {
                     ]),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 28),
+                padding: const EdgeInsets.only(bottom: 28),
                 child: ElevatedButton(
                   onPressed: () {
                     widget.addProductsToCart(
                         widget.products[widget.currentIndex]);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: CustomColors.purple,
+                    backgroundColor: CustomColors.purple,
                     elevation: 0,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                    minimumSize: Size(326, 59),
+                    minimumSize: const Size(326, 59),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Adicionar ao carrinho",
                     style: TextStyle(
                         fontSize: 19,

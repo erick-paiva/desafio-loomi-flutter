@@ -17,6 +17,8 @@ import 'package:loomi_flutter_boilerplate/src/utils/validators.dart';
 class LoginPage extends StatefulWidget {
   static const routeName = "login";
 
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -60,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 11),
+                      margin: const EdgeInsets.only(left: 11),
                       child: Text(
                         "SóTintas",
                         style: Fonts.headline1.copyWith(
@@ -71,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 40, top: 84),
+                  margin: const EdgeInsets.only(bottom: 40, top: 84),
                   child: Text(
                     "Entrar na plataforma",
                     style: Fonts.headline1.copyWith(
@@ -105,9 +107,9 @@ class _LoginPageState extends State<LoginPage> {
                   textStyle: TextStyle(color: CustomColors.purple),
                   width: 240,
                   height: 48,
-                  padding: EdgeInsets.all(0),
-                  margin:
-                      EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
+                  padding: const EdgeInsets.all(0),
+                  margin: const EdgeInsets.only(
+                      left: 20, right: 20, top: 40, bottom: 20),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
