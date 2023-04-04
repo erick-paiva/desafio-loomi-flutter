@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:loomi_flutter_boilerplate/src/components/text_field_container.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
+import 'package:loomi_flutter_boilerplate/src/utils/validators.dart';
 
 class InputText extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final EdgeInsetsGeometry? margin;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+  final TextEditingController? controller;
 
-  const InputText({super.key, this.hintText, this.labelText, this.margin});
+  const InputText(
+      {super.key,
+      this.hintText,
+      this.labelText,
+      this.margin,
+      this.validator,
+      this.keyboardType,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +30,19 @@ class InputText extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16)),
       child: TextFormField(
+        validator: validator,
+        controller: controller,
         style: TextStyle(color: CustomColors.white),
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: hintText,
-            hintStyle: TextStyle(color: CustomColors.white)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(color: CustomColors.white),
+          fillColor: CustomColors.purple50,
+          filled: true,
+        ),
       ),
     );
   }
