@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loomi_flutter_boilerplate/src/components/text_field_container.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
-import 'package:loomi_flutter_boilerplate/src/utils/validators.dart';
 
 class InputText extends StatelessWidget {
   final String? hintText;
@@ -23,7 +22,8 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 20, vertical: 21),
+      margin:
+          margin ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 21),
       Labelchild: Text(labelText ?? "",
           style: TextStyle(
               color: CustomColors.white,

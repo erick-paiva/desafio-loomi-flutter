@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/description_of_paints/description_of_paints.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 
 class ProductCard extends StatelessWidget {
@@ -54,7 +53,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                       Row(
@@ -62,21 +61,21 @@ class ProductCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 'R\$',
                                 style: TextStyle(
                                     fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 priceFormatted,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                           if (deliveryFree)
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 2),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),

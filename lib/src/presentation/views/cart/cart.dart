@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:loomi_flutter_boilerplate/src/external/models/cart_model.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/cart/components/product_card.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/store.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
 
 class Cart extends StatefulWidget {
   static const routeName = "cart";
@@ -46,7 +42,7 @@ class _CartState extends State<Cart> {
           children: [
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: 15),
+                margin: const EdgeInsets.only(top: 15),
                 alignment: Alignment.center,
                 child: ListView.builder(
                   itemCount: widget.userCart.length,
@@ -55,7 +51,7 @@ class _CartState extends State<Cart> {
                     return Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: ProductCard(
                             name: product.name,
                             price: product.price,
@@ -64,7 +60,7 @@ class _CartState extends State<Cart> {
                             onTap: () {},
                           ),
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                       ],
                     );
                   },
@@ -72,20 +68,20 @@ class _CartState extends State<Cart> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 28),
+              margin: const EdgeInsets.only(bottom: 28),
               child: ElevatedButton(
                 onPressed: () {
                   widget.cleanTheCart();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: CustomColors.purple,
+                  backgroundColor: CustomColors.purple,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
-                  minimumSize: Size(326, 59),
+                  minimumSize: const Size(326, 59),
                 ),
-                child: Text(
+                child: const Text(
                   "Confirmar compra",
                   style: TextStyle(
                     fontSize: 19,

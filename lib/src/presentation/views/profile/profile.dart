@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/usecases/profile_response.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/login_page/login_page.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/authentication.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
-import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
 
 class Profile extends StatefulWidget {
   static const routeName = "profile";
@@ -42,8 +40,9 @@ class _ProfileState extends State<Profile> {
               width: double.infinity,
               alignment: Alignment.center,
               height: 124,
-              margin: EdgeInsets.only(left: 30, right: 30, top: 18, bottom: 26),
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 22),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 18, bottom: 26),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 22),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(width: 1, color: CustomColors.gray100),
@@ -63,7 +62,7 @@ class _ProfileState extends State<Profile> {
                             width: 70,
                           ),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         Text(
                           widget.profileUser?.name ?? "",
                           style: TextStyle(
@@ -76,7 +75,7 @@ class _ProfileState extends State<Profile> {
                   ]),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 28, left: 30, right: 30),
+              margin: const EdgeInsets.only(bottom: 28, left: 30, right: 30),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(width: 1, color: CustomColors.gray100),
@@ -89,10 +88,10 @@ class _ProfileState extends State<Profile> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: CustomColors.white,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  minimumSize: Size(double.infinity, 55),
+                  minimumSize: const Size(double.infinity, 55),
                 ),
                 child: Text(
                   "Fazer logout",

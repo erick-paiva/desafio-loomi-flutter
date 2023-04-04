@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/description_of_paints/description_of_paints.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 
 class ProductCard extends StatelessWidget {

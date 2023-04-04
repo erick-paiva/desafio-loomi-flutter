@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_boilerplate/src/components/custom_switch.dart';
 import 'package:loomi_flutter_boilerplate/src/external/models/cart_model.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_get_paint_uc.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/input_search.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/product_card.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/widgets/search_bar_component.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 
 class Store extends StatefulWidget {
@@ -36,11 +33,11 @@ class _StoreState extends State<Store> {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 24),
+                margin: const EdgeInsets.symmetric(vertical: 24),
                 child: Text(
                   'Opções de tintas',
                   style: TextStyle(
@@ -106,7 +103,7 @@ class _StoreState extends State<Store> {
               return Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ProductCard(
                       name: product.name,
                       price: product.price,
@@ -118,7 +115,7 @@ class _StoreState extends State<Store> {
                       },
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                 ],
               );
             },

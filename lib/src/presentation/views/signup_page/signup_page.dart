@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:loomi_flutter_boilerplate/src/components/input_text.dart';
-import 'package:loomi_flutter_boilerplate/src/components/text_field_container.dart';
 import 'package:loomi_flutter_boilerplate/src/external/models/signup.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_post_signup_uc.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/home/home.dart';
 import 'package:loomi_flutter_boilerplate/src/components/input_password.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/login_page/login_page.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/signup_page/signup_page.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/widgets/custom_button.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/widgets/search_bar_component.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/fonts.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
@@ -18,6 +14,8 @@ import 'package:loomi_flutter_boilerplate/src/utils/validators.dart';
 
 class SignupPage extends StatefulWidget {
   static const routeName = "signup";
+
+  const SignupPage({super.key});
 
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -49,9 +47,8 @@ class _SignupPageState extends State<SignupPage> {
         body: Form(
           key: _formKey,
           child: Center(
-              child: Container(
-                  child: SingleChildScrollView(
-                      child: Column(
+              child: SingleChildScrollView(
+                  child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
@@ -64,7 +61,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 11),
+                    margin: const EdgeInsets.only(left: 11),
                     child: Text(
                       "SóTintas",
                       style: Fonts.headline1.copyWith(
@@ -75,7 +72,7 @@ class _SignupPageState extends State<SignupPage> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 40, top: 84),
+                margin: const EdgeInsets.only(bottom: 40, top: 84),
                 child: Text(
                   "Criar conta",
                   style: Fonts.headline1.copyWith(
@@ -88,14 +85,15 @@ class _SignupPageState extends State<SignupPage> {
                   labelText: "Nome",
                   hintText: "nome",
                   controller: _nameController,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   validator: Validators.requiredValidator(attribute: "nome")),
               InputText(
                   labelText: "E-mail",
                   hintText: "e-mail",
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 17),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
                   validator: Validators.emailValidator()),
               InputPassword(
                   hintText: "senha",
@@ -105,7 +103,8 @@ class _SignupPageState extends State<SignupPage> {
               InputPassword(
                   hintText: "confirmar senha",
                   labelText: "Confirmar senha",
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 17),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
                   validator: (value) => Validators.confirmPasswordValidator(
                       _passwordController.text, value!),
                   controller: _confirmPasswordController),
@@ -121,12 +120,12 @@ class _SignupPageState extends State<SignupPage> {
                 textStyle: TextStyle(color: CustomColors.purple),
                 width: 240,
                 height: 48,
-                padding: EdgeInsets.all(0),
-                margin:
-                    EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
+                padding: const EdgeInsets.all(0),
+                margin: const EdgeInsets.only(
+                    left: 20, right: 20, top: 40, bottom: 20),
               ),
             ],
-          )))),
+          ))),
         ));
   }
 }
