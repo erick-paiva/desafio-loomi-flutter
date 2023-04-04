@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:loomi_flutter_boilerplate/src/external/models/cart_model.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/cart/components/product_card.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/store.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
@@ -9,26 +10,22 @@ import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
 class Cart extends StatefulWidget {
   static const routeName = "cart";
 
+  final List<CartModel> userCart;
   final void Function(String page) setCurrentPage;
+  final void Function() cleanTheCart;
 
-  const Cart({Key? key, required this.setCurrentPage}) : super(key: key);
+  const Cart(
+      {Key? key,
+      required this.setCurrentPage,
+      required this.userCart,
+      required this.cleanTheCart})
+      : super(key: key);
 
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
-  int _currentIndex = 0;
-  final controller = CarouselController();
-
-  nextPage() {
-    controller.nextPage();
-  }
-
-  previousPage() {
-    controller.previousPage();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,18 +49,18 @@ class _CartState extends State<Cart> {
                 margin: EdgeInsets.only(top: 15),
                 alignment: Alignment.center,
                 child: ListView.builder(
-                  itemCount: products.length,
+                  itemCount: widget.userCart.length,
                   itemBuilder: (context, index) {
-                    final product = products[index];
+                    final product = widget.userCart[index];
                     return Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: ProductCard(
-                            name: product['name'],
-                            price: product['price'],
-                            deliveryFree: product['deliveryFree'],
-                            coverImage: product['coverImage'],
+                            name: product.name,
+                            price: product.price,
+                            deliveryFree: product.deliveryFree,
+                            coverImage: product.coverImage,
                             onTap: () {},
                           ),
                         ),
@@ -77,7 +74,9 @@ class _CartState extends State<Cart> {
             Container(
               margin: EdgeInsets.only(bottom: 28),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.cleanTheCart();
+                },
                 style: ElevatedButton.styleFrom(
                   primary: CustomColors.purple,
                   elevation: 0,
