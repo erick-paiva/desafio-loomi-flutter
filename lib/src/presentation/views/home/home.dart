@@ -10,6 +10,7 @@ import 'package:loomi_flutter_boilerplate/src/presentation/usecases/profile_resp
 import 'package:loomi_flutter_boilerplate/src/presentation/views/cart/cart.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/description_of_paints/description_of_paints.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/store.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/views/how_to_paint/how_to_paint.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/profile/profile.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
@@ -33,6 +34,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String _currentPage = "store";
 
+  bool _showBottomNavigationBar = true;
   int _currentProductIndex = 0;
   int _pageIndex = 0;
   List<CartModel> _products = [];
@@ -45,6 +47,11 @@ class _HomeState extends State<Home> {
   void setCurrentPage(String page) {
     setState(() {
       _currentPage = page;
+      if (page == "HowToPaint") {
+        _showBottomNavigationBar = false;
+      } else {
+        _showBottomNavigationBar = true;
+      }
     });
   }
 
@@ -153,40 +160,46 @@ class _HomeState extends State<Home> {
           setCurrentPage: setCurrentPage,
           products: _filteredProducts,
           currentIndex: _currentProductIndex,
-          addProductsToCart: addProductsToCart)
+          addProductsToCart: addProductsToCart),
+      "HowToPaint": HowToPaint(setCurrentPage: setCurrentPage)
     };
 
     return Scaffold(
       body: _screens[_currentPage],
-      bottomNavigationBar: Container(
-          alignment: Alignment.center,
-          height: 85,
-          decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey, offset: Offset(0, -3), blurRadius: 7)
-              ],
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              color: Colors.white),
-          child: BottomNavigationBar(
-            currentIndex: _pageIndex,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            items: _bottomNavigationBarItems(),
-            selectedFontSize: 14,
-            unselectedFontSize: 14,
-            selectedLabelStyle:
-                TextStyle(height: 2.2, fontWeight: FontWeight.bold),
-            selectedItemColor: CustomColors.purple,
-            unselectedItemColor: Colors.grey,
-            onTap: (int index) {
-              setState(() {
-                _pageIndex = index;
-                _currentPage = _screensIndex[index]!;
-              });
-            },
-          )),
+      bottomNavigationBar: _showBottomNavigationBar == true
+          ? Container(
+              alignment: Alignment.center,
+              height: 85,
+              decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0, -3),
+                        blurRadius: 7)
+                  ],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Colors.white),
+              child: BottomNavigationBar(
+                currentIndex: _pageIndex,
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                items: _bottomNavigationBarItems(),
+                selectedFontSize: 14,
+                unselectedFontSize: 14,
+                selectedLabelStyle:
+                    const TextStyle(height: 2.2, fontWeight: FontWeight.bold),
+                selectedItemColor: CustomColors.purple,
+                unselectedItemColor: Colors.grey,
+                onTap: (int index) {
+                  setState(() {
+                    _pageIndex = index;
+                    _currentPage = _screensIndex[index]!;
+                  });
+                },
+              ))
+          : const SizedBox.shrink(),
     );
   }
 }
