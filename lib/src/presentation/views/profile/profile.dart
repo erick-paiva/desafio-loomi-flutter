@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:loomi_flutter_boilerplate/src/presentation/views/login/login.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/profile_response.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/views/login_page/login_page.dart';
+import 'package:loomi_flutter_boilerplate/src/utils/authentication.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
 
 class Profile extends StatefulWidget {
   static const routeName = "profile";
+  final ProfileResponse? profileUser;
 
   final void Function(String page) setCurrentPage;
 
-  const Profile({Key? key, required this.setCurrentPage}) : super(key: key);
+  const Profile({Key? key, required this.setCurrentPage, this.profileUser})
+      : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -38,7 +42,7 @@ class _ProfileState extends State<Profile> {
               width: double.infinity,
               alignment: Alignment.center,
               height: 124,
-              margin: EdgeInsets.only(left: 45, right: 45, top: 18, bottom: 26),
+              margin: EdgeInsets.only(left: 30, right: 30, top: 18, bottom: 26),
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 22),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -53,7 +57,7 @@ class _ProfileState extends State<Profile> {
                       children: [
                         ClipOval(
                           child: Image.network(
-                            "https://chefbob.com.br/wp-content/uploads/2021/05/2021-05-12-como-deixar-os-gatos-mais-tranquilos.jpg",
+                            widget.profileUser?.avatar ?? "",
                             fit: BoxFit.cover,
                             height: 70,
                             width: 70,
@@ -61,7 +65,7 @@ class _ProfileState extends State<Profile> {
                         ),
                         SizedBox(width: 20),
                         Text(
-                          "Eduardo Almeida",
+                          widget.profileUser?.name ?? "",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -72,14 +76,15 @@ class _ProfileState extends State<Profile> {
                   ]),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 28),
+              margin: EdgeInsets.only(bottom: 28, left: 30, right: 30),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(width: 1, color: CustomColors.gray100),
                   color: CustomColors.white),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Login.routeName);
+                  Authentication.logout();
+                  Navigator.pushNamed(context, LoginPage.routeName);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: CustomColors.white,
@@ -87,7 +92,7 @@ class _ProfileState extends State<Profile> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  minimumSize: Size(326, 55),
+                  minimumSize: Size(double.infinity, 55),
                 ),
                 child: Text(
                   "Fazer logout",
