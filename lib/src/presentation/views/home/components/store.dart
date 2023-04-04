@@ -12,6 +12,7 @@ class Store extends StatefulWidget {
   final List<CartModel> products;
   final bool onlyFreeDeliveries;
   final TextEditingController searchValueController;
+  final bool isLoading;
 
   const Store({
     Key? key,
@@ -21,6 +22,7 @@ class Store extends StatefulWidget {
     required this.handleSearch,
     required this.onlyFreeDeliveries,
     required this.searchValueController,
+    required this.isLoading,
   }) : super(key: key);
 
   @override
@@ -95,32 +97,36 @@ class _StoreState extends State<Store> {
             ],
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: widget.products.length,
-            itemBuilder: (context, index) {
-              final product = widget.products[index];
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ProductCard(
-                      name: product.name,
-                      price: product.price,
-                      deliveryFree: product.deliveryFree,
-                      coverImage: product.coverImage,
-                      onTap: () {
-                        widget.setCurrentProductIndex(index);
-                        widget.setCurrentPage("DescriptionOfPaints");
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                ],
-              );
-            },
-          ),
-        ),
+        widget.isLoading
+            ? CircularProgressIndicator(
+                color: CustomColors.purple,
+              )
+            : Expanded(
+                child: ListView.builder(
+                  itemCount: widget.products.length,
+                  itemBuilder: (context, index) {
+                    final product = widget.products[index];
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: ProductCard(
+                            name: product.name,
+                            price: product.price,
+                            deliveryFree: product.deliveryFree,
+                            coverImage: product.coverImage,
+                            onTap: () {
+                              widget.setCurrentProductIndex(index);
+                              widget.setCurrentPage("DescriptionOfPaints");
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                    );
+                  },
+                ),
+              ),
       ],
     );
   }

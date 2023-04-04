@@ -35,6 +35,7 @@ class _HomeState extends State<Home> {
   String _currentPage = "store";
 
   bool _showBottomNavigationBar = true;
+  bool _isLoading = true;
   int _currentProductIndex = 0;
   int _pageIndex = 0;
   List<CartModel> _products = [];
@@ -64,10 +65,12 @@ class _HomeState extends State<Home> {
   void handleSearch(String value, bool onlyFreeDeliveries) async {
     setState(() {
       _onlyFreeDeliveries = onlyFreeDeliveries;
+      _isLoading = true;
     });
     if (value == "" && !onlyFreeDeliveries) {
       setState(() {
         _filteredProducts = _products;
+        _isLoading = false;
       });
     } else {
       var response = await GetIt.I.get<ISearchPaintUseCase>()(search: value);
@@ -78,6 +81,7 @@ class _HomeState extends State<Home> {
           }
           return true;
         }).toList();
+        _isLoading = false;
       });
     }
   }
@@ -101,6 +105,7 @@ class _HomeState extends State<Home> {
     setState(() {
       _products = response.toList();
       _filteredProducts = response.toList();
+      _isLoading = false;
     });
   }
 
@@ -109,6 +114,7 @@ class _HomeState extends State<Home> {
 
     setState(() {
       _profileUser = response;
+      _isLoading = false;
     });
   }
 
@@ -149,7 +155,8 @@ class _HomeState extends State<Home> {
           setCurrentProductIndex: setCurrentProductIndex,
           handleSearch: handleSearch,
           onlyFreeDeliveries: _onlyFreeDeliveries,
-          searchValueController: _searchValueController),
+          searchValueController: _searchValueController,
+          isLoading: _isLoading),
       "cart": Cart(
           setCurrentPage: setCurrentPage,
           userCart: _userCart,
