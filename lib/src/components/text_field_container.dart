@@ -5,6 +5,7 @@ class TextFieldContainer extends StatelessWidget {
   final Widget? child;
   final Widget? Labelchild;
   final EdgeInsetsGeometry? margin;
+
   const TextFieldContainer({
     Key? key,
     this.child,
@@ -20,15 +21,11 @@ class TextFieldContainer extends StatelessWidget {
           Container(margin: EdgeInsets.only(left: 15), child: Labelchild),
           Container(
             width: double.infinity,
-            height: 56,
             alignment: Alignment.center,
             margin: EdgeInsets.symmetric(vertical: 11),
             padding: EdgeInsets.symmetric(
               horizontal: 14,
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: CustomColors.purple50),
             child: child,
           )
         ]));
