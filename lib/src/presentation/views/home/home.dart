@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:loomi_flutter_boilerplate/src/external/models/cart_model.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_get_paint_uc.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_get_profile_uc.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_post_cart_uc.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/i_search_paint_uc.dart';
+import 'package:loomi_flutter_boilerplate/src/presentation/usecases/profile_response.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/cart/cart.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/description_of_paints/description_of_paints.dart';
 import 'package:loomi_flutter_boilerplate/src/presentation/views/home/components/store.dart';
@@ -8,6 +15,12 @@ import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/helpers/assets_helper.dart';
 
 final _screensIndex = {0: "store", 1: "cart", 2: "profile"};
+
+final _svgIcons = [
+  {"img": 'shop.svg', "label": 'Loja'},
+  {"img": 'cart.svg', "label": 'Carrinho'},
+  {"img": 'person.svg', "label": 'Perfil'},
+];
 
 class Home extends StatefulWidget {
   static const routeName = "home";
@@ -18,19 +31,85 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _pageIndex = 0;
   String _currentPage = "store";
 
-  final _svgIcons = [
-    {"img": 'shop.svg', "label": 'Loja'},
-    {"img": 'cart.svg', "label": 'Carrinho'},
-    {"img": 'person.svg', "label": 'Perfil'},
-  ];
+  int _currentProductIndex = 0;
+  int _pageIndex = 0;
+  List<CartModel> _products = [];
+  List<CartModel> _userCart = [];
+  List<CartModel> _filteredProducts = [];
+  bool _onlyFreeDeliveries = false;
+  ProfileResponse? _profileUser;
+  final _searchValueController = TextEditingController();
 
   void setCurrentPage(String page) {
     setState(() {
       _currentPage = page;
     });
+  }
+
+  void setCurrentProductIndex(int index) {
+    setState(() {
+      _currentProductIndex = index;
+    });
+  }
+
+  void handleSearch(String value, bool onlyFreeDeliveries) async {
+    setState(() {
+      _onlyFreeDeliveries = onlyFreeDeliveries;
+    });
+    if (value == "" && !onlyFreeDeliveries) {
+      setState(() {
+        _filteredProducts = _products;
+      });
+    } else {
+      var response = await GetIt.I.get<ISearchPaintUseCase>()(search: value);
+      setState(() {
+        _filteredProducts = response.where((item) {
+          if (onlyFreeDeliveries) {
+            return item.deliveryFree == true;
+          }
+          return true;
+        }).toList();
+      });
+    }
+  }
+
+  void addProductsToCart(CartModel product) async {
+    setState(() {
+      _userCart.add(product);
+    });
+    await GetIt.I.get<IPostCartUseCase>()(data: product);
+  }
+
+  void cleanTheCart() {
+    setState(() {
+      _userCart = [];
+    });
+  }
+
+  void getPaints() async {
+    var response = await GetIt.I.get<IGetPaintUseCase>()();
+
+    setState(() {
+      _products = response.toList();
+      _filteredProducts = response.toList();
+    });
+  }
+
+  void getProfileUser() async {
+    var response = await GetIt.I.get<IGetProfileUseCase>()();
+
+    setState(() {
+      _profileUser = response;
+    });
+  }
+
+  @override
+  void initState() {
+    getPaints();
+    getProfileUser();
+    super.initState();
   }
 
   List<BottomNavigationBarItem> _bottomNavigationBarItems() {
@@ -58,13 +137,23 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final _screens = {
       "store": Store(
-        setCurrentPage: setCurrentPage,
-      ),
-      "cart": Cart(setCurrentPage: setCurrentPage),
-      "profile": Profile(setCurrentPage: setCurrentPage),
+          setCurrentPage: setCurrentPage,
+          products: _filteredProducts,
+          setCurrentProductIndex: setCurrentProductIndex,
+          handleSearch: handleSearch,
+          onlyFreeDeliveries: _onlyFreeDeliveries,
+          searchValueController: _searchValueController),
+      "cart": Cart(
+          setCurrentPage: setCurrentPage,
+          userCart: _userCart,
+          cleanTheCart: cleanTheCart),
+      "profile":
+          Profile(setCurrentPage: setCurrentPage, profileUser: _profileUser),
       "DescriptionOfPaints": DescriptionOfPaints(
-        setCurrentPage: setCurrentPage,
-      )
+          setCurrentPage: setCurrentPage,
+          products: _filteredProducts,
+          currentIndex: _currentProductIndex,
+          addProductsToCart: addProductsToCart)
     };
 
     return Scaffold(
