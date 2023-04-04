@@ -1,29 +1,69 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:loomi_flutter_boilerplate/src/utils/custom_colors.dart';
 
-class InputSearch extends StatelessWidget {
+class InputSearch extends StatefulWidget {
   final String? hintText;
   final String? labelText;
   final EdgeInsetsGeometry? margin;
+  final TextEditingController? controller;
+  final void Function(String) onChanged;
 
-  const InputSearch({super.key, this.hintText, this.labelText, this.margin});
+  InputSearch(
+      {super.key,
+      this.hintText,
+      this.labelText,
+      this.margin,
+      this.controller,
+      required this.onChanged});
+
+  @override
+  _InputSearchState createState() => _InputSearchState();
+}
+
+class _InputSearchState extends State<InputSearch> {
+  Timer? _debounce;
+
+  _onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(
+      const Duration(milliseconds: 550),
+      () {
+        widget.onChanged(value);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-      Labelchild: Text(labelText ?? "",
+      margin: widget.margin ?? EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      Labelchild: Text(widget.labelText ?? "",
           style: TextStyle(
-              color: CustomColors.white,
+              color: CustomColors.black10,
               fontWeight: FontWeight.bold,
               fontSize: 16)),
       child: TextFormField(
-        style: TextStyle(color: CustomColors.white),
+        onChanged: (value) {
+          _onSearchChanged(value);
+        },
+        onFieldSubmitted: (value) {
+          _onSearchChanged(value);
+        },
+        controller: widget.controller,
+        style: TextStyle(color: CustomColors.black10),
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
             icon: Icon(Icons.search, size: 30),
             border: InputBorder.none,
-            hintText: hintText,
+            hintText: widget.hintText,
             hintStyle: TextStyle(color: CustomColors.gray70)),
       ),
     );
