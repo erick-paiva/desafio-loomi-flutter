@@ -22,6 +22,7 @@ class Information extends StatelessWidget {
     return SizedBox(
       width: 320,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
