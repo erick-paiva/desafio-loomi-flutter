@@ -18,9 +18,9 @@ class SetupFlavors {
       baseUrl = "";
     } else {
       if (packageInfo.packageName.contains("homolog")) {
-        baseUrl = "";
+        baseUrl = "https://62968cc557b625860610144c.mockapi.io";
       } else if (packageInfo.packageName.contains("staging")) {
-        baseUrl = "";
+        baseUrl = "https://62968cc557b625860610144c.mockapi.io";
       } else {
         baseUrl = "";
       }
