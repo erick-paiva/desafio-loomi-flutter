@@ -9,6 +9,7 @@ class CustomColors {
 
   static Color grey = HexColor("#0d2C3B8B");
   static Color gray30 = HexColor("#ecebef");
+  static Color gray40 = HexColor("#DADADA");
   static Color gray50 = HexColor("#00000029");
   static Color gray70 = HexColor("#A4A4A4");
   static Color gray80 = HexColor("#707070");
