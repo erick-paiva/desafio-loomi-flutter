@@ -87,8 +87,7 @@ class HowToPaint extends StatelessWidget {
               const Information(
                   number: "6",
                   title: "Acabou",
-                  description:
-                      "Passe mais uma camada de tinta por cima da parede para reduzir imperfeições"),
+                  description: "Sua parede está pronta"),
               const SizedBox(height: 92),
             ],
           ),
