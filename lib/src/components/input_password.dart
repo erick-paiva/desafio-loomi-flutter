@@ -6,7 +6,16 @@ class InputPassword extends StatefulWidget {
   final String? hintText;
   final String? labelText;
   final EdgeInsetsGeometry? margin;
-  const InputPassword({Key? key, this.labelText, this.hintText, this.margin})
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+
+  const InputPassword(
+      {Key? key,
+      this.labelText,
+      this.hintText,
+      this.margin,
+      this.validator,
+      this.controller})
       : super(key: key);
 
   @override
@@ -26,10 +35,14 @@ class _InputPasswordState extends State<InputPassword> {
               fontWeight: FontWeight.bold,
               fontSize: 16)),
       child: TextFormField(
+        validator: widget.validator,
         obscureText: _isObscureText,
+        controller: widget.controller,
         style: TextStyle(color: CustomColors.white),
         decoration: InputDecoration(
-            border: InputBorder.none,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             hintText: widget.hintText,
             suffixIcon: GestureDetector(
               onTap: () {
@@ -42,7 +55,9 @@ class _InputPasswordState extends State<InputPassword> {
                 color: CustomColors.white,
               ),
             ),
-            hintStyle: TextStyle(color: CustomColors.white)),
+            hintStyle: TextStyle(color: CustomColors.white),
+            fillColor: CustomColors.purple50,
+            filled: true),
       ),
     );
   }
