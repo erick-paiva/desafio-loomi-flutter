@@ -3,8 +3,6 @@
   <img src="" alt="" width="" />
 </p>
 
-<h1 align="center">Loomi Flutter Leap</h1>
-
 
 ### Userful links
 - [Mockup]()
